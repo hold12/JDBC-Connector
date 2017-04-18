@@ -1,0 +1,24 @@
+package dto01917;
+
+public class ProductBatchDTO
+{
+	int productbatchId;                     // i omraadet 1-99999999
+	int status;					// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
+	int recipeId;
+	
+	public ProductBatchDTO(int productbatchId, int status, int recipeId)
+	{
+		this.productbatchId = productbatchId;
+		this.status = status;
+		this.recipeId = recipeId;
+	}
+	
+	public int getProductbatchId() { return productbatchId; }
+	public void setProductbatchId(int productbatchId) { this.productbatchId = productbatchId; }
+	public int getStatus() { return status; }
+	public void setStatus(int status) { this.status = status; }
+	public int getRecipeId() { return recipeId; }
+	public void setRecipeId(int recipeId) { this.recipeId = recipeId; }
+	public String toString() { return productbatchId + "\t" + status + "\t" + recipeId; }
+}
+
