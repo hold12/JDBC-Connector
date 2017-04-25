@@ -9,4 +9,5 @@ public interface OperatorDAO {
 	List<OperatorDTO> getOperatorList() throws DALException;
 	void createOperator(OperatorDTO operator) throws DALException;
 	void updateOperator(OperatorDTO operator) throws DALException;
+	void deleteOperator(OperatorDTO operator) throws DALException;
 }
