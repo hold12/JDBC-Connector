@@ -13,7 +13,8 @@ import dto01917.OperatorDTO;
 
 public class MySQLOperatorDAO implements OperatorDAO {
 	public OperatorDTO getOperator(int operatorId) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM operator WHERE operator_id = " + operatorId);
+//		ResultSet rs = Connector.doQuery("SELECT * FROM operator WHERE operator_id = " + operatorId);
+		ResultSet rs = Connector.doQuery(Queries.getFormatted("operator.select.all", Integer.toString(operatorId)));
 	    try {
 	    	if (!rs.first()) throw new DALException("The operator " + operatorId + " does not exist.");
 	    	return new OperatorDTO(rs.getInt("operator_id"), rs.getString("operator_name"), rs.getString("initials"), rs.getString("cpr"), rs.getString("password"));

@@ -1,0 +1,22 @@
+sudo: required
+
+language: java
+jdk:
+  - oraclejdk8
+
+services:
+  - docker
+
+before_install:
+  - git clone https://github.com/hold12/CDIO_final_docker
+  - cd CDIO_final_docker
+  - docker-compose up -d
+  - docker ps -a
+  - mysql -u $MYASQL_USERNAME -h 127.0.0.1 -P 3306 -p $MYSQL_PASSWORD < tables.sql
+
+notifications:
+  email:
+    recipiens:
+      - anders@wiberg.tech
+    on_success: never
+    on_failure: change
