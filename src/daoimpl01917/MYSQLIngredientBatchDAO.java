@@ -1,38 +1,103 @@
 package daoimpl01917;
 
+import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.IngredientBatchDAO;
 import dto01917.IngredientBatchDTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by User on 25-04-2017.
+ * Created by Freya on 01-05-2017.
  */
-public class MYSQLIngredientBatchDAO implements IngredientBatchDAO{
+public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
     @Override
-    public IngredientBatchDTO getIngredientBatch(int recipeId) throws DALException {
-        return null;
+    public IngredientBatchDTO getIngredientBatch(int ingredientBatchId) throws DALException {
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "ingredientbatch.select.where.id",
+                Integer.toString(ingredientBatchId)
+        ));
+
+        try {
+            if (!rs.first()) throw new DALException("The ingredientbatch " + ingredientBatchId + " does not exist.");
+            return new IngredientBatchDTO(
+                    rs.getInt("ingredientbatch_id"),
+                    rs.getInt("ingredient_id"),
+                    rs.getDouble("amount")
+            );
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
     }
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList() throws DALException {
-        return null;
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "ingredientbatch.select.all"
+        ));
+
+        List<IngredientBatchDTO> list = new LinkedList<>();
+
+        try {
+            while (rs.next()) {
+                list.add(new IngredientBatchDTO(
+                        rs.getInt("ingredientbatch_id"),
+                        rs.getInt("ingredient_id"),
+                        rs.getDouble("amount")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+
+        return list;
     }
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList(int ingredientId) throws DALException {
-        return null;
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "ingredientbatch.select.where.ingredientid",
+                Integer.toString(ingredientId)
+        ));
+
+        List<IngredientBatchDTO> list = new LinkedList<>();
+
+        try {
+            while (rs.next()) {
+                list.add(new IngredientBatchDTO(
+                        rs.getInt("ingredientbatch_id"),
+                        rs.getInt("ingredient_id"),
+                        rs.getDouble("amount")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+
+        return list;
     }
 
     @Override
     public void createIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-
+        Connector.doUpdate(Queries.getFormatted(
+                "ingredientbatch.insert",
+                Integer.toString(ingredientBatch.getIngredientBatchId()),
+                Integer.toString(ingredientBatch.getIngredientId()),
+                Double.toString(ingredientBatch.getAmount())
+        ));
     }
 
     @Override
     public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-
+        Connector.doUpdate(Queries.getFormatted(
+                "ingredientbatch.update",
+                Integer.toString(ingredientBatch.getIngredientBatchId()),
+                Integer.toString(ingredientBatch.getIngredientId()),
+                Double.toString(ingredientBatch.getAmount())
+        ));
     }
 
     @Override
