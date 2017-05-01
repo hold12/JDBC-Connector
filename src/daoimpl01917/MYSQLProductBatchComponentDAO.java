@@ -1,9 +1,13 @@
 package daoimpl01917;
 
+import connector01917.Connector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProductBatchComponentDAO;
 import dto01917.ProductBatchComponentDTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -11,23 +15,88 @@ import java.util.List;
  */
 public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
     @Override
-    public ProductBatchComponentDTO getProductBatchComponent(int productbatchId, int recipebatchId) throws DALException {
-        return null;
+    public ProductBatchComponentDTO getProductBatchComponent(int productbatchId, int ingredientbatchId) throws DALException {
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "productbatchcomponent.select.where.id",
+                Integer.toString(productbatchId),
+                Integer.toString(ingredientbatchId)
+        ));
+
+        try {
+            if (!rs.first()) throw new DALException("The productbatchcomponent " + productbatchId + " " + ingredientbatchId + " does not exist.");
+            return new ProductBatchComponentDTO(
+                    rs.getInt("productbatch_id"),
+                    rs.getInt("ingredientbatch_id"),
+                    rs.getDouble("tare"),
+                    rs.getDouble("net_weight"),
+                    rs.getInt("operator_id")
+            );
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
     }
 
     @Override
     public List<ProductBatchComponentDTO> getProductBatchComponentList(int productbatchId) throws DALException {
-        return null;
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "productbatchcomponent.select.where.productbatchid",
+                Integer.toString(productbatchId)
+        ));
+
+        List<ProductBatchComponentDTO> list = new LinkedList<>();
+
+        try {
+            while (rs.next()) {
+                list.add(new ProductBatchComponentDTO(
+                        rs.getInt("productbatch_id"),
+                        rs.getInt("ingredientbatch_id"),
+                        rs.getDouble("tare"),
+                        rs.getDouble("net_weight"),
+                        rs.getInt("operator_id")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+
+        return list;
     }
 
     @Override
     public List<ProductBatchComponentDTO> getProductBatchComponentList() throws DALException {
-        return null;
+        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+                "productbatchcomponent.select.all"
+        ));
+
+        List<ProductBatchComponentDTO> list = new LinkedList<>();
+
+        try {
+            while (rs.next()) {
+                list.add(new ProductBatchComponentDTO(
+                        rs.getInt("productbatch_id"),
+                        rs.getInt("ingredientbatch_id"),
+                        rs.getDouble("tare"),
+                        rs.getDouble("net_weight"),
+                        rs.getInt("operator_id")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+
+        return list;
     }
 
     @Override
-    public void createProductBatchComponent(ProductBatchComponentDTO produktBatchComponent) throws DALException {
-
+    public void createProductBatchComponent(ProductBatchComponentDTO productBatchComponent) throws DALException {
+        Connector.doUpdate(Queries.getFormatted(
+                "productbatchcomponent.insert",
+                Integer.toString(productBatchComponent.getProductbatchId()),
+                Integer.toString(productBatchComponent.getIngredientbatchId()),
+                Double.toString(productBatchComponent.getTare()),
+                Double.toString(productBatchComponent.getNetWeight()),
+                Integer.toString(productBatchComponent.getOperatorId())
+        ));
     }
 
     @Override
