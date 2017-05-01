@@ -22,7 +22,7 @@ public class Main {
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
 		System.out.println("Insertion of a new operator with operator_id = 4");
-		OperatorDTO operatorDTO = new OperatorDTO(4,"Don Juan","DJ","000000-0000","iloveyou");
+		OperatorDTO operatorDTO = new OperatorDTO(4,"Don","Juan","DJ","000000-0000","iloveyou");
 		try { operator.createOperator(operatorDTO); }
 		catch (DALException e) { System.out.println(e.getMessage()); }	
 		
