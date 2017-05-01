@@ -9,4 +9,5 @@ public interface ProductBatchDAO {
 	List<ProductBatchDTO> getProductBatchList() throws DALException;
 	void createProductBatch(ProductBatchDTO productbatch) throws DALException;
 	void updateProductBatch(ProductBatchDTO productbatch) throws DALException;
+	void deleteProductBatch(ProductBatchDTO productBatch) throws DALException;
 }
