@@ -84,7 +84,6 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
     public void createIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
         Connector.doUpdate(Queries.getFormatted(
                 "ingredientbatch.insert",
-                Integer.toString(ingredientBatch.getIngredientBatchId()),
                 Integer.toString(ingredientBatch.getIngredientId()),
                 Double.toString(ingredientBatch.getAmount())
         ));
