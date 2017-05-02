@@ -19,17 +19,18 @@ public class OperatorDTO
 	/** Operatoer cpr-nr 10 karakterer */
 	String cpr;                 
 	/** Operatoer password min. 7 max. 8 karakterer */
-	String password;            
+	String password;
+    boolean isActive;
 
-	public OperatorDTO(int operatorId, String operatorFirstname, String operatorLastname, String initials, String cpr, String password)
-	{
+    public OperatorDTO(int operatorId, String operatorFirstname, String operatorLastname, String initials, String cpr, String password, boolean isActive) {
 		this.operatorId = operatorId;
 		this.operatorFirstname = operatorFirstname;
 		this.operatorLastname = operatorLastname;
 		this.initials = initials;
 		this.cpr = cpr;
 		this.password = password;
-	}
+        this.isActive = isActive;
+    }
 	
     public OperatorDTO(OperatorDTO opr)
     {
@@ -39,6 +40,7 @@ public class OperatorDTO
     	this.initials = opr.getInitials();
     	this.cpr = opr.getCpr();
     	this.password = opr.getPassword();
+        this.isActive = opr.isActive();
     }
     
     public int getOperatorId() { return operatorId; }
@@ -53,5 +55,16 @@ public class OperatorDTO
 	public void setCpr(String cpr) { this.cpr = cpr; }
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
-	public String toString() { return operatorId + "\t" + operatorFirstname + "\t" + initials + "\t" + cpr + "\t" + password; }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public String toString() {
+        return operatorId + "\t" + operatorFirstname + "\t" + initials + "\t" + cpr + "\t" + password + "\t" + isActive;
+    }
 }
