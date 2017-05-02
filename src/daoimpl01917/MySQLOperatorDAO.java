@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MySQLOperatorDAO implements OperatorDAO {
     public OperatorDTO getOperator(int operatorId) throws DALException {
-//		ResultSet rs = Connector.doQuery("SELECT * FROM operator WHERE operator_id = " + operatorId);
         ResultSet rs = Connector.doQuery(Queries.getFormatted(
                 "operator.select.where.id", Integer.toString(operatorId)
         ));
@@ -25,7 +24,8 @@ public class MySQLOperatorDAO implements OperatorDAO {
                     rs.getString("operator_lastname"),
                     rs.getString("initials"),
                     rs.getString("cpr"),
-                    rs.getString("password")
+                    rs.getString("password"),
+                    rs.getBoolean("is_active")
             );
         } catch (SQLException e) {
             throw new DALException(e);
@@ -45,6 +45,12 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public void updateOperator(OperatorDTO operator) throws DALException {
+        int isActive = 0;
+
+        if (operator.isActive()) {
+            isActive = 1;
+        }
+
         Connector.doUpdate(Queries.getFormatted(
                 "operator.update",
                 Integer.toString(operator.getOperatorId()),
@@ -52,7 +58,8 @@ public class MySQLOperatorDAO implements OperatorDAO {
                 operator.getOperatorLastname(),
                 operator.getInitials(),
                 operator.getCpr(),
-                operator.getPassword()
+                operator.getPassword(),
+                Integer.toString(isActive)
         ));
     }
 
@@ -77,7 +84,8 @@ public class MySQLOperatorDAO implements OperatorDAO {
                         rs.getString("operator_lastname"),
                         rs.getString("initials"),
                         rs.getString("cpr"),
-                        rs.getString("password"))
+                        rs.getString("password"),
+                        rs.getBoolean("is_active"))
                 );
             }
         } catch (SQLException e) {
@@ -86,4 +94,3 @@ public class MySQLOperatorDAO implements OperatorDAO {
         return list;
     }
 }
-
