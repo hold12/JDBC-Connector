@@ -11,18 +11,15 @@ import connector01917.Connector;
 public class Main {
 	public static void main(String[] args) {
 		try { new Connector(); } 
-		catch (InstantiationException e) { e.printStackTrace(); }
-		catch (IllegalAccessException e) { e.printStackTrace(); }
-		catch (ClassNotFoundException e) { e.printStackTrace(); }
-		catch (SQLException e) { e.printStackTrace(); }
-		
+		catch (InstantiationException|IllegalAccessException|ClassNotFoundException|SQLException e) { e.printStackTrace(); }
+
 		System.out.println("Operator no. 3:");
 		MySQLOperatorDAO operator = new MySQLOperatorDAO();
 		try { System.out.println(operator.getOperator(3)); }
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
 		System.out.println("Insertion of a new operator with operator_id = 4");
-		OperatorDTO operatorDTO = new OperatorDTO(4,"Don","Juan","DJ","000000-0000","iloveyou");
+		OperatorDTO operatorDTO = new OperatorDTO(4,"Don","Juan","DJ","000000-0000","iloveyou",true);
 		try { operator.createOperator(operatorDTO); }
 		catch (DALException e) { System.out.println(e.getMessage()); }	
 		
