@@ -11,11 +11,8 @@ import connector01917.Connector;
 public class Main {
 	public static void main(String[] args) {
 		try { new Connector(); } 
-		catch (InstantiationException e) { e.printStackTrace(); }
-		catch (IllegalAccessException e) { e.printStackTrace(); }
-		catch (ClassNotFoundException e) { e.printStackTrace(); }
-		catch (SQLException e) { e.printStackTrace(); }
-		
+		catch (InstantiationException|IllegalAccessException|ClassNotFoundException|SQLException e) { e.printStackTrace(); }
+
 		System.out.println("Operator no. 3:");
 		MySQLOperatorDAO operator = new MySQLOperatorDAO();
 		try { System.out.println(operator.getOperator(3)); }
