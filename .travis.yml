@@ -11,6 +11,8 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS dbweight;'
   - git clone https://github.com/hold12/CDIO_final_sql
   - mysql -u root dbweight < CDIO_final_sql/tables.sql
+  - wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
+  - mv junit-4.12.jar /usr/share/ant/lib/
 
 notifications:
   email:
