@@ -12,8 +12,6 @@ before_install:
   - git clone https://github.com/hold12/CDIO_final_sql
   - mysql -u root dbweight < CDIO_final_sql/tables.sql
   - wget http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
-  - sudo mv junit-4.12.jar /usr/share/ant/lib/
-  - sudo apt-get install ant-optional
 
 notifications:
   email:
