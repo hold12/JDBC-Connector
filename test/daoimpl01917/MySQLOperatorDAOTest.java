@@ -14,6 +14,8 @@ import static org.junit.Assert.*;
  * Created by AndersWOlsen on 05-05-2017.
  */
 public class MySQLOperatorDAOTest {
+    private final OperatorDTO opExpected = new OperatorDTO(1, "John", "Doe", "JD", "010190-1234", "p455w0rd", false);
+
     @Before
     public void setUp() throws Exception {
         try { new Connector(); }
@@ -28,7 +30,6 @@ public class MySQLOperatorDAOTest {
     @Test
     public void getOperator() throws Exception {
         MySQLOperatorDAO operatorDAO = new MySQLOperatorDAO();
-        OperatorDTO opExpected = new OperatorDTO(1, "Angelo", "A", "AA", "070770-7007", "1Kje4fa", false);
         OperatorDTO opActual = operatorDAO.getOperator(1);
 
         assertTrue(opExpected.getOperatorFirstname().equals(opActual.getOperatorFirstname()));
