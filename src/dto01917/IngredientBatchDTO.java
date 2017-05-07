@@ -12,7 +12,19 @@ public class IngredientBatchDTO
 		this.ingredientId = ingredientId;
 		this.amount = amount;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		IngredientBatchDTO that = (IngredientBatchDTO) o;
+
+		if (ingredientBatchId != that.ingredientBatchId) return false;
+		if (ingredientId != that.ingredientId) return false;
+		return Double.compare(that.amount, amount) == 0;
+	}
+
 	public int getIngredientBatchId() { return ingredientBatchId; }
 	public void setIngredientBatchId(int ingredientBatchId) { this.ingredientBatchId = ingredientBatchId; }
 	public int getIngredientId() { return ingredientId; }

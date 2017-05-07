@@ -1,6 +1,7 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.OperatorDAO;
 import dto01917.OperatorDTO;
@@ -11,8 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLOperatorDAO implements OperatorDAO {
+    private IConnector connector;
+
+    public MySQLOperatorDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     public OperatorDTO getOperator(int operatorId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "operator.select.where.id", Integer.toString(operatorId)
         ));
 
@@ -34,7 +41,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public void createOperator(OperatorDTO operator) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "operator.insert",
                 operator.getOperatorFirstname(),
                 operator.getOperatorLastname(),
@@ -51,7 +58,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
             isActive = 1;
         }
 
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "operator.update",
                 Integer.toString(operator.getOperatorId()),
                 operator.getOperatorFirstname(),
@@ -64,7 +71,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public void deleteOperator(OperatorDTO operator) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "operator.delete",
                 Integer.toString(operator.getOperatorId())
         ));
@@ -72,7 +79,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
 
     public List<OperatorDTO> getOperatorList() throws DALException {
         List<OperatorDTO> list = new ArrayList<OperatorDTO>();
-        ResultSet rs = Connector.doQuery(
+        ResultSet rs = connector.doQuery(
                 Queries.getSQL("operator.select.all")
         );
 

@@ -1,6 +1,7 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProductBatchDAO;
 import dto01917.ProductBatchDTO;
@@ -14,9 +15,15 @@ import java.util.List;
  * Created by User on 25-04-2017.
  */
 public class MYSQLProductBatchDAO implements ProductBatchDAO {
+    private IConnector connector;
+
+    public MYSQLProductBatchDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
     public ProductBatchDTO getProductBatch(int productbatchId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "productbatch.select.where.id",
                 Integer.toString(productbatchId)
         ));
@@ -35,7 +42,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public List<ProductBatchDTO> getProductBatchList() throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "productbatch.select.all"
         ));
 
@@ -58,7 +65,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public void createProductBatch(ProductBatchDTO productBatch) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "productbatch.insert",
                 Integer.toString(productBatch.getStatus()),
                 Integer.toString(productBatch.getRecipeId())
@@ -67,7 +74,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public void updateProductBatch(ProductBatchDTO productBatch) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "productbatch.update",
                 Integer.toString(productBatch.getProductbatchId()),
                 Integer.toString(productBatch.getStatus()),
