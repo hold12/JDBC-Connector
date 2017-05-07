@@ -60,7 +60,7 @@ public class TestConnector implements IConnector {
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
             } else if (cmd.contains("from view_recipe")) {
-                RecipeDTO recipeDTO = new RecipeDTO(1, "Nachos");
+                RecipeDTO recipeDTO = new RecipeDTO(1, "pizza");
                 // Insert a recipe to the ResultSet
                 insertRecipeResultSet(recipeDTO);
             }
