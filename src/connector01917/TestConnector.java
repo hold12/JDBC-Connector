@@ -138,10 +138,8 @@ public class TestConnector implements IConnector {
     private void insertRecipeResultSet(RecipeDTO recipe) throws DALException {
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("recipe_id");
-                will(returnValue((recipe.getRecipeId())));
-                allowing(resultSet).getString("recipe_name");
-                will(returnValue((recipe.getRecipeName())));
+                allowing(resultSet).getInt("recipe_id");        will(returnValue((recipe.getRecipeId())));
+                allowing(resultSet).getString("recipe_name");   will(returnValue((recipe.getRecipeName())));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
