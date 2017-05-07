@@ -12,6 +12,18 @@ public class ProductBatchDTO
 		this.status = status;
 		this.recipeId = recipeId;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		ProductBatchDTO that = (ProductBatchDTO) o;
+
+		if (productbatchId != that.productbatchId) return false;
+		if (status != that.status) return false;
+		return recipeId == that.recipeId;
+	}
 	
 	public int getProductbatchId() { return productbatchId; }
 	public void setProductbatchId(int productbatchId) { this.productbatchId = productbatchId; }
