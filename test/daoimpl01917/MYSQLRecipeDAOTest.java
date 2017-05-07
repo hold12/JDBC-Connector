@@ -25,10 +25,10 @@ public class MYSQLRecipeDAOTest {
 
     @Test
     public void getRecipe() throws Exception {
-        RecipeDTO inExpected = testRecipe;
-        RecipeDTO inActual = recipeDAO.getRecipe(1);
+        RecipeDTO reExpected = testRecipe;
+        RecipeDTO reActual = recipeDAO.getRecipe(1);
         assertTrue(((TestConnector) connector).isSelected());
-        assertTrue(inExpected.equals(inActual));
+        assertTrue(reExpected.equals(reActual));
     }
 
     @Test
