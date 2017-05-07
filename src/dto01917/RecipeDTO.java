@@ -39,5 +39,6 @@ public class RecipeDTO
 
 		if (recipeId != that.recipeId) return false;
 		if (recipeName != that.recipeName) return false;
+		return recipeId == that.recipeId;
 	}
 }
