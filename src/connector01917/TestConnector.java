@@ -138,12 +138,9 @@ public class TestConnector implements IConnector {
     private void insertProductBatchResultSet(ProductBatchDTO productBatch) throws DALException {
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("productbatch_id");
-                will(returnValue(productBatch.getProductbatchId()));
-                allowing(resultSet).getInt("status");
-                will(returnValue(productBatch.getStatus()));
-                allowing(resultSet).getInt("recipe_id");
-                will(returnValue(productBatch.getRecipeId()));
+                allowing(resultSet).getInt("productbatch_id");  will(returnValue(productBatch.getProductbatchId()));
+                allowing(resultSet).getInt("status");           will(returnValue(productBatch.getStatus()));
+                allowing(resultSet).getInt("recipe_id");        will(returnValue(productBatch.getRecipeId()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
