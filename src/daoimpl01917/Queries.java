@@ -30,6 +30,6 @@ public class Queries {
     }
 
     public static String getFormatted(String propertyName, String... args) {
-        return MessageFormat.format(getSQL(propertyName), args);
+        return MessageFormat.format(getSQL(propertyName), (Object[]) args);
     }
 }
