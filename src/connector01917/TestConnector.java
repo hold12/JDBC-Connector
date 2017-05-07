@@ -62,6 +62,10 @@ public class TestConnector implements IConnector {
             } else if(cmd.contains("from view_recipecomponent")){
                 RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
                 insertRecipeComponentResultSet(recipeComponentDTO);
+            } else if (cmd.contains("from view_recipe")) {
+                RecipeDTO recipeDTO = new RecipeDTO(1, "pizza");
+                // Insert a recipe to the ResultSet
+                insertRecipeResultSet(recipeDTO);
             }
         }
 
@@ -128,6 +132,17 @@ public class TestConnector implements IConnector {
                 allowing(resultSet).getDouble("tare");            will(returnValue(productBatchComponent.getTare()));
                 allowing(resultSet).getDouble("net_weight");      will(returnValue(productBatchComponent.getNetWeight()));
                 allowing(resultSet).getInt("operator_id");        will(returnValue(productBatchComponent.getOperatorId()));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
+    private void insertRecipeResultSet(RecipeDTO recipe) throws DALException {
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("recipe_id");        will(returnValue((recipe.getRecipeId())));
+                allowing(resultSet).getString("recipe_name");   will(returnValue((recipe.getRecipeName())));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
