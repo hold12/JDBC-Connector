@@ -39,7 +39,7 @@ public class MYSQLRecipeDAOTest {
 
     @Test
     public void updateRecipe() throws Exception {
-        RecipeDTO newRecipe = new RecipeDTO(2, "Melt cheese");
+        RecipeDTO newRecipe = new RecipeDTO(1, "Melt cheese");
         recipeDAO.updateRecipe(newRecipe);
         assertTrue(((TestConnector) connector).isUpdated());
     }
