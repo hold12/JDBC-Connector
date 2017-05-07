@@ -37,8 +37,7 @@ public class RecipeDTO
 
 		RecipeDTO that = (RecipeDTO) o;
 
-		if (recipeId != that.recipeId) return false;
-		if (recipeName != that.recipeName) return false;
 		return recipeId == that.recipeId;
+		return recipeName != null ? recipeName.equals(that.recipeName) : that.recipeName == null;
 	}
 }
