@@ -1,5 +1,7 @@
 package test01917;
 
+import connector01917.IConnector;
+import connector01917.TestConnector;
 import daoimpl01917.MySQLOperatorDAO;
 import daointerfaces01917.DALException;
 import dto01917.OperatorDTO;
@@ -10,19 +12,15 @@ import connector01917.Connector;
 
 public class Main {
 	public static void main(String[] args) {
-		try { new Connector(); } 
-		catch (InstantiationException e) { e.printStackTrace(); }
-		catch (IllegalAccessException e) { e.printStackTrace(); }
-		catch (ClassNotFoundException e) { e.printStackTrace(); }
-		catch (SQLException e) { e.printStackTrace(); }
-		
+		IConnector connector = new TestConnector();
+
 		System.out.println("Operator no. 3:");
-		MySQLOperatorDAO operator = new MySQLOperatorDAO();
+		MySQLOperatorDAO operator = new MySQLOperatorDAO(connector);
 		try { System.out.println(operator.getOperator(3)); }
 		catch (DALException e) { System.out.println(e.getMessage()); }
 		
 		System.out.println("Insertion of a new operator with operator_id = 4");
-		OperatorDTO operatorDTO = new OperatorDTO(4,"Don","Juan","DJ","000000-0000","iloveyou");
+		OperatorDTO operatorDTO = new OperatorDTO(4,"Don","Juan","DJ","000000-0000","iloveyou", false);
 		try { operator.createOperator(operatorDTO); }
 		catch (DALException e) { System.out.println(e.getMessage()); }	
 		
