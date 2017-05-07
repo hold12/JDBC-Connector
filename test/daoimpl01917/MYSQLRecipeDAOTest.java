@@ -2,6 +2,7 @@ package daoimpl01917;
 
 import connector01917.IConnector;
 import connector01917.TestConnector;
+import daointerfaces01917.RecipeDAO;
 import dto01917.RecipeDTO;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,17 +32,8 @@ public class MYSQLRecipeDAOTest {
     }
 
     @Test
-    public void getRecipeList() throws Exception {
-        RecipeDTO inExpected = testRecipe;
-        RecipeDTO inActual = recipeDAO.getRecipeList();
-        assertTrue(((TestConnector) connector).isSelected());
-        assertTrue(inExpected.equals(inActual));
-    }
-
-    @Test
     public void createRecipe() throws Exception {
-        RecipeDTO inExpected = testRecipe;
-        RecipeDTO inActual = recipeDAO.createRecipe(testRecipe);
+        recipeDAO.createRecipe(testRecipe);
         assertTrue(((TestConnector) connector).isInserted());
     }
 
