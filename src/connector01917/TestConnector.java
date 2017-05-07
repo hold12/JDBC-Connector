@@ -1,10 +1,7 @@
 package connector01917;
 
 import daointerfaces01917.DALException;
-import dto01917.IngredientBatchDTO;
-import dto01917.IngredientDTO;
-import dto01917.OperatorDTO;
-import dto01917.ProductBatchComponentDTO;
+import dto01917.*;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
@@ -62,6 +59,9 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
+            } else if(cmd.contains("from view_recipecomponent")){
+                RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
+                insertRecipeComponentResultSet(recipeComponentDTO);
             }
         }
 
@@ -133,6 +133,20 @@ public class TestConnector implements IConnector {
             throw new DALException(e);
         }
     }
+
+    private void insertRecipeComponentResultSet(RecipeComponentDTO recipeComponent) throws DALException{
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("recipe_id"); will(returnValue(recipeComponent.getRecipeId()));
+                allowing(resultSet).getInt("ingredient_id"); will(returnValue(recipeComponent.getIngredientId()));
+                allowing(resultSet).getDouble("nominated_net_weight"); will(returnValue(recipeComponent.getNominatedNetWeight()));
+                allowing(resultSet).getDouble("tolerance"); will(returnValue(recipeComponent.getTolerance()));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
 
 
     public boolean isSelected() { return selected; }
