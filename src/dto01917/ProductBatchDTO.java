@@ -2,15 +2,27 @@ package dto01917;
 
 public class ProductBatchDTO
 {
-	int productbatchId;                     // i omraadet 1-99999999
-	int status;					// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
-	int recipeId;
+	private int productbatchId;                     // i omraadet 1-99999999
+	private int status;					// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
+	private int recipeId;
 	
 	public ProductBatchDTO(int productbatchId, int status, int recipeId)
 	{
 		this.productbatchId = productbatchId;
 		this.status = status;
 		this.recipeId = recipeId;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		ProductBatchDTO that = (ProductBatchDTO) o;
+
+		if (productbatchId != that.productbatchId) return false;
+		if (status != that.status) return false;
+		return recipeId == that.recipeId;
 	}
 	
 	public int getProductbatchId() { return productbatchId; }

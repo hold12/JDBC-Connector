@@ -2,10 +2,10 @@ package dto01917;
 
 public class RecipeComponentDTO
 {
-	int recipeId;                  // auto genereres fra 1..n
-	int ingredientId;             // i omraadet 1-99999999
-	double nominatedNetWeight;            // skal vaere positiv og passende stor
-	double tolerance;           // skal vaere positiv og passende stor
+	private int recipeId;                  // auto genereres fra 1..n
+	private int ingredientId;             // i omraadet 1-99999999
+	private double nominatedNetWeight;            // skal vaere positiv og passende stor
+	private double tolerance;           // skal vaere positiv og passende stor
 	
 	public RecipeComponentDTO(int recipeId, int ingredientId, double nominatedNetWeight, double tolerance)
 	{
@@ -14,6 +14,20 @@ public class RecipeComponentDTO
 		this.nominatedNetWeight = nominatedNetWeight;
 		this.tolerance = tolerance;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		RecipeComponentDTO that = (RecipeComponentDTO) o;
+
+		if (recipeId != that.recipeId) return false;
+		if (ingredientId != that.ingredientId) return false;
+		if (Double.compare(that.nominatedNetWeight, nominatedNetWeight) != 0) return false;
+		return Double.compare(that.tolerance, tolerance) == 0;
+	}
+
 
 	public int getRecipeId() { return recipeId; }
 	public void setRecipeId(int recipeId) { this.recipeId = recipeId; }

@@ -10,9 +10,9 @@ package dto01917;
 public class RecipeDTO
 {
 	/** Recept nr i omraadet 1-99999999 */
-	int recipeId;
+	private int recipeId;
 	/** Receptnavn min. 2 max. 20 karakterer */
-	String recipeName;
+	private String recipeName;
 	/** liste af kompenenter i recepten */
 	
     
@@ -28,5 +28,16 @@ public class RecipeDTO
 	public void setRecipeName(String recipeName) { this.recipeName = recipeName; }
 	public String toString() { 
 		return recipeId + "\t" + recipeName;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		RecipeDTO that = (RecipeDTO) o;
+
+		if (recipeId != that.recipeId) return false;
+		return recipeName != null ? recipeName.equals(that.recipeName) : that.recipeName == null;
 	}
 }

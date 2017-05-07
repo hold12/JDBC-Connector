@@ -9,4 +9,5 @@ public interface IngredientDAO {
 	List<IngredientDTO> getIngredientList() throws DALException;
 	void createIngredient(IngredientDTO ingredient) throws DALException;
 	void updateIngredient(IngredientDTO ingredient) throws DALException;
+	void deleteIngredient(IngredientDTO ingredient) throws DALException;
 }
