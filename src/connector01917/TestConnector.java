@@ -83,13 +83,13 @@ public class TestConnector implements IConnector {
     private void insertOperatorResultSet(OperatorDTO operator) throws DALException {
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("operator_id"); will(returnValue(operator.getOperatorId()));
+                allowing(resultSet).getInt("operator_id");           will(returnValue(operator.getOperatorId()));
                 allowing(resultSet).getString("operator_firstname"); will(returnValue(operator.getOperatorFirstname()));
-                allowing(resultSet).getString("operator_lastname"); will(returnValue(operator.getOperatorLastname()));
-                allowing(resultSet).getString("initials"); will(returnValue(operator.getInitials()));
-                allowing(resultSet).getString("cpr"); will(returnValue(operator.getCpr()));
-                allowing(resultSet).getString("password"); will(returnValue(operator.getPassword()));
-                allowing(resultSet).getBoolean("is_active"); will(returnValue(operator.isActive()));
+                allowing(resultSet).getString("operator_lastname");  will(returnValue(operator.getOperatorLastname()));
+                allowing(resultSet).getString("initials");           will(returnValue(operator.getInitials()));
+                allowing(resultSet).getString("cpr");                will(returnValue(operator.getCpr()));
+                allowing(resultSet).getString("password");           will(returnValue(operator.getPassword()));
+                allowing(resultSet).getBoolean("is_active");         will(returnValue(operator.isActive()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
@@ -100,8 +100,8 @@ public class TestConnector implements IConnector {
         try {
             mockery.checking(new Expectations() {{
                 allowing(resultSet).getInt("ingredientbatch_id"); will(returnValue(1));
-                allowing(resultSet).getInt("ingredient_id"); will(returnValue(2));
-                allowing(resultSet).getDouble("amount"); will(returnValue(3.4));
+                allowing(resultSet).getInt("ingredient_id");      will(returnValue(2));
+                allowing(resultSet).getDouble("amount");          will(returnValue(3.4));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
@@ -111,12 +111,9 @@ public class TestConnector implements IConnector {
     private void insertIngredientResultSet(IngredientDTO ingredient) throws DALException {
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("ingredient_id");
-                will(returnValue(ingredient.getIngredientId()));
-                allowing(resultSet).getString("ingredient_name");
-                will(returnValue(ingredient.getIngredientName()));
-                allowing(resultSet).getString("supplier");
-                will(returnValue(ingredient.getSupplier()));
+                allowing(resultSet).getInt("ingredient_id");      will(returnValue(ingredient.getIngredientId()));
+                allowing(resultSet).getString("ingredient_name"); will(returnValue(ingredient.getIngredientName()));
+                allowing(resultSet).getString("supplier");        will(returnValue(ingredient.getSupplier()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
@@ -126,16 +123,11 @@ public class TestConnector implements IConnector {
     private void insertProductBatchComponentResultSet(ProductBatchComponentDTO productBatchComponent) throws DALException {
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("productbatch_id");
-                will(returnValue(productBatchComponent.getProductbatchId()));
-                allowing(resultSet).getInt("ingredientbatch_id");
-                will(returnValue(productBatchComponent.getIngredientbatchId()));
-                allowing(resultSet).getDouble("tare");
-                will(returnValue(productBatchComponent.getTare()));
-                allowing(resultSet).getDouble("net_weight");
-                will(returnValue(productBatchComponent.getNetWeight()));
-                allowing(resultSet).getInt("operator_id");
-                will(returnValue(productBatchComponent.getOperatorId()));
+                allowing(resultSet).getInt("productbatch_id");    will(returnValue(productBatchComponent.getProductbatchId()));
+                allowing(resultSet).getInt("ingredientbatch_id"); will(returnValue(productBatchComponent.getIngredientbatchId()));
+                allowing(resultSet).getDouble("tare");            will(returnValue(productBatchComponent.getTare()));
+                allowing(resultSet).getDouble("net_weight");      will(returnValue(productBatchComponent.getNetWeight()));
+                allowing(resultSet).getInt("operator_id");        will(returnValue(productBatchComponent.getOperatorId()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
