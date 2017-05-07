@@ -59,8 +59,9 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
-            } else if(cmd.contains("from view  _recipecomponent")){
+            } else if(cmd.contains("from view_recipecomponent")){
                 RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
+                insertRecipeComponentResultSet(recipeComponentDTO);
             }
         }
 
@@ -144,14 +145,10 @@ public class TestConnector implements IConnector {
     private void insertRecipeComponentResultSet(RecipeComponentDTO recipeComponent) throws DALException{
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("recipeId");
-                will(returnValue(recipeComponent.getRecipeId()));
-                allowing(resultSet).getInt("ingredientId");
-                will(returnValue(recipeComponent.getIngredientId()));
-                allowing(resultSet).getDouble("nominatedNetWeight");
-                will(returnValue(recipeComponent.getNominatedNetWeight()));
-                allowing(resultSet).getDouble("tolerance");
-                will(returnValue(recipeComponent.getTolerance()));
+                allowing(resultSet).getInt("recipe_id"); will(returnValue(recipeComponent.getRecipeId()));
+                allowing(resultSet).getInt("ingredient_id"); will(returnValue(recipeComponent.getIngredientId()));
+                allowing(resultSet).getDouble("nominated_net_weight"); will(returnValue(recipeComponent.getNominatedNetWeight()));
+                allowing(resultSet).getDouble("tolerance"); will(returnValue(recipeComponent.getTolerance()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
