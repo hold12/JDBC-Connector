@@ -2,9 +2,9 @@ package dto01917;
 
 public class ProductBatchDTO
 {
-	int productbatchId;                     // i omraadet 1-99999999
-	int status;					// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
-	int recipeId;
+	private int productbatchId;                     // i omraadet 1-99999999
+	private int status;					// 0: ikke paabegyndt, 1: under produktion, 2: afsluttet
+	private int recipeId;
 	
 	public ProductBatchDTO(int productbatchId, int status, int recipeId)
 	{
