@@ -12,7 +12,10 @@ import connector01917.Connector;
 
 public class Main {
 	public static void main(String[] args) {
-		IConnector connector = new TestConnector();
+		IConnector connector = null;
+		try {
+			connector = new TestConnector();
+		} catch (SQLException e) {}
 
 		System.out.println("Operator no. 3:");
 		MySQLOperatorDAO operator = new MySQLOperatorDAO(connector);
