@@ -1,10 +1,7 @@
 package connector01917;
 
 import daointerfaces01917.DALException;
-import dto01917.IngredientBatchDTO;
-import dto01917.IngredientDTO;
-import dto01917.OperatorDTO;
-import dto01917.ProductBatchComponentDTO;
+import dto01917.*;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
@@ -62,6 +59,9 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
+            } else if (cmd.contains("view_recipe")) {
+                // Insert a recipe to the ResultSet
+                insert
             }
         }
 
@@ -139,6 +139,16 @@ public class TestConnector implements IConnector {
             }});
         } catch (SQLException e) {
             throw new DALException(e);
+        }
+    }
+
+    private void insertRecipeResultSet(RecipeComponentDTO recipeComponent) throws DALException {
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("recipe_id");
+                will(returnValue((recipeComponent.getIngredientId())))
+                // in progress here --->
+            }});
         }
     }
 
