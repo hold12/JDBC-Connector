@@ -2,6 +2,7 @@ package connector01917;
 
 import daointerfaces01917.DALException;
 import dto01917.IngredientBatchDTO;
+import dto01917.IngredientDTO;
 import dto01917.OperatorDTO;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -14,13 +15,12 @@ import java.sql.SQLException;
  * Created by AndersWOlsen on 07-05-2017.
  */
 public class TestConnector implements IConnector {
+    private final Mockery mockery = new Mockery();
+    private final ResultSet resultSet = mockery.mock(ResultSet.class);
     private boolean selected;
     private boolean inserted;
     private boolean updated;
     private boolean deleted;
-
-    private final Mockery mockery = new Mockery();
-    private final ResultSet resultSet = mockery.mock(ResultSet.class);
 
     public TestConnector() throws SQLException{
         this.selected = false;
@@ -53,6 +53,10 @@ public class TestConnector implements IConnector {
                 IngredientBatchDTO ingredientBatchDTO = new IngredientBatchDTO(1, 2, 3.4);
                 // Insert an ingredient batch to the ResultSet
                 insertIngredientBatchResultSet(ingredientBatchDTO);
+            } else if (cmd.contains("ingredient")) {
+                IngredientDTO ingredientDTO = new IngredientDTO(1, "tomato", "Heinz");
+                // Insert an ingredient to the ResultSet
+                insertIngredientResultSet(ingredientDTO);
             }
         }
 
@@ -98,6 +102,22 @@ public class TestConnector implements IConnector {
             throw new DALException(e);
         }
     }
+
+    private void insertIngredientResultSet(IngredientDTO ingredient) throws DALException {
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("ingredient_id");
+                will(returnValue(ingredient.getIngredientId()));
+                allowing(resultSet).getString("ingredient_name");
+                will(returnValue(ingredient.getIngredientName()));
+                allowing(resultSet).getString("supplier");
+                will(returnValue(ingredient.getSupplier()));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
 
     public boolean isSelected() { return selected; }
     public boolean isInserted() { return inserted; }
