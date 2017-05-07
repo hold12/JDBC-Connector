@@ -5,6 +5,7 @@ import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.IngredientBatchDAO;
 import dto01917.IngredientBatchDTO;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,6 +109,6 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void deleteIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-
+        throw new NotImplementedException();
     }
 }
