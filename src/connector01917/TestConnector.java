@@ -5,7 +5,6 @@ import dto01917.OperatorDTO;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.auto.Mock;
-import org.mockito.Mockito;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
