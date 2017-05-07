@@ -1,12 +1,11 @@
 package daoimpl01917;
 
-import connector01917.Connector;
 import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProductBatchComponentDAO;
 import dto01917.ProductBatchComponentDTO;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -109,11 +108,11 @@ public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
 
     @Override
     public void updateProductBatchComponent(ProductBatchComponentDTO productBatchComponent) throws DALException {
-
+        throw new NotImplementedException();
     }
 
     @Override
     public void deleteProductBatchComponent(ProductBatchComponentDTO productBatchComponent) throws DALException {
-
+        throw new NotImplementedException();
     }
 }
