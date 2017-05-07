@@ -39,8 +39,8 @@ public class MYSQLProductBatchComponentDAOTest {
 
     @Test(expected = NotImplementedException.class)
     public void updateProductBatchComponent() throws Exception {
-        ProductBatchComponentDTO newIngredientBatch = new ProductBatchComponentDTO(1, 1, 0.5, 10, 2);
-        productBatchComponentDAO.updateProductBatchComponent(newIngredientBatch);
+        ProductBatchComponentDTO newProductBatchComponent = new ProductBatchComponentDTO(1, 1, 0.5, 10, 2);
+        productBatchComponentDAO.updateProductBatchComponent(newProductBatchComponent);
     }
 
     @Test(expected = NotImplementedException.class)

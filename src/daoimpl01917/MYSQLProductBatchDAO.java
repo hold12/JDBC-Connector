@@ -1,10 +1,10 @@
 package daoimpl01917;
 
-import connector01917.Connector;
 import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProductBatchDAO;
 import dto01917.ProductBatchDTO;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,6 +84,6 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public void deleteProductBatch(ProductBatchDTO productBatch) throws DALException {
-
+        throw new NotImplementedException();
     }
 }
