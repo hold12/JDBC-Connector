@@ -2,6 +2,7 @@ package daoimpl01917;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.text.MessageFormat;
@@ -12,20 +13,15 @@ import java.text.MessageFormat;
 public class Queries {
     public static String getSQL(String propertyName) {
         File file = new File("resources/sql.properties");
-        FileInputStream fileInputStream;
         Properties properties = null;
 
-        try {
-            fileInputStream = new FileInputStream(file);
-
+        try (FileInputStream fileInputStream = new FileInputStream(file)){
             properties = new Properties();
             properties.load(fileInputStream);
 
-            fileInputStream.close();
         } catch (IOException e) {
-            System.err.println("Could read file \"resources/sql.properties\".");
+            System.err.println("Failed to read file: \"resources/sql.properties\".");
         }
-
         return properties.getProperty(propertyName);
     }
 
