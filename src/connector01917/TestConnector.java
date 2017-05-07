@@ -4,6 +4,7 @@ import daointerfaces01917.DALException;
 import dto01917.IngredientBatchDTO;
 import dto01917.IngredientDTO;
 import dto01917.OperatorDTO;
+import dto01917.ProductBatchComponentDTO;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
@@ -45,18 +46,22 @@ public class TestConnector implements IConnector {
             this.selected = true;
 
             // If the SQL statement includes "operator" in it
-            if (cmd.contains("operator")) {
+            if (cmd.contains("from view_operator")) {
                 OperatorDTO operator = new OperatorDTO(1, "John", "Doe", "JD", "010190-1234", "p455w0rd!", false);
                 // Insert an operator to the ResultSet
                 insertOperatorResultSet(operator);
-            } else if (cmd.contains("ingredientbatch")) {
+            } else if (cmd.contains("from view_ingredientbatch")) {
                 IngredientBatchDTO ingredientBatchDTO = new IngredientBatchDTO(1, 2, 3.4);
                 // Insert an ingredient batch to the ResultSet
                 insertIngredientBatchResultSet(ingredientBatchDTO);
-            } else if (cmd.contains("ingredient")) {
+            } else if (cmd.contains("from view_ingredient")) {
                 IngredientDTO ingredientDTO = new IngredientDTO(1, "tomato", "Heinz");
                 // Insert an ingredient to the ResultSet
                 insertIngredientResultSet(ingredientDTO);
+            } else if (cmd.contains("from view_productbatchcomponent")) {
+                ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
+                // Insert an ingredient to the ResultSet
+                insertProductBatchComponentResultSet(productBatchComponentDTO);
             }
         }
 
@@ -112,6 +117,25 @@ public class TestConnector implements IConnector {
                 will(returnValue(ingredient.getIngredientName()));
                 allowing(resultSet).getString("supplier");
                 will(returnValue(ingredient.getSupplier()));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
+    private void insertProductBatchComponentResultSet(ProductBatchComponentDTO productBatchComponent) throws DALException {
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("productbatch_id");
+                will(returnValue(productBatchComponent.getProductbatchId()));
+                allowing(resultSet).getInt("ingredientbatch_id");
+                will(returnValue(productBatchComponent.getIngredientbatchId()));
+                allowing(resultSet).getDouble("tare");
+                will(returnValue(productBatchComponent.getTare()));
+                allowing(resultSet).getDouble("net_weight");
+                will(returnValue(productBatchComponent.getNetWeight()));
+                allowing(resultSet).getInt("operator_id");
+                will(returnValue(productBatchComponent.getOperatorId()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);
