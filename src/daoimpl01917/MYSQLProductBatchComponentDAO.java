@@ -1,10 +1,12 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.ProductBatchComponentDAO;
 import dto01917.ProductBatchComponentDTO;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -14,9 +16,15 @@ import java.util.List;
  * Created by User on 25-04-2017.
  */
 public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
+    private IConnector connector;
+
+    public MYSQLProductBatchComponentDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
     public ProductBatchComponentDTO getProductBatchComponent(int productbatchId, int ingredientbatchId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "productbatchcomponent.select.where.id",
                 Integer.toString(productbatchId),
                 Integer.toString(ingredientbatchId)
@@ -38,7 +46,7 @@ public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
 
     @Override
     public List<ProductBatchComponentDTO> getProductBatchComponentList(int productbatchId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "productbatchcomponent.select.where.productbatchid",
                 Integer.toString(productbatchId)
         ));
@@ -64,7 +72,7 @@ public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
 
     @Override
     public List<ProductBatchComponentDTO> getProductBatchComponentList() throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "productbatchcomponent.select.all"
         ));
 
@@ -89,7 +97,7 @@ public class MYSQLProductBatchComponentDAO implements ProductBatchComponentDAO {
 
     @Override
     public void createProductBatchComponent(ProductBatchComponentDTO productBatchComponent) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "productbatchcomponent.insert",
                 Integer.toString(productBatchComponent.getProductbatchId()),
                 Integer.toString(productBatchComponent.getIngredientbatchId()),

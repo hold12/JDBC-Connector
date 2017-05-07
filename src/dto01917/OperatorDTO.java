@@ -64,7 +64,37 @@ public class OperatorDTO
         this.isActive = isActive;
     }
 
-    public String toString() {
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		OperatorDTO that = (OperatorDTO) o;
+
+		if (operatorId != that.operatorId) return false;
+		if (isActive != that.isActive) return false;
+		if (operatorFirstname != null ? !operatorFirstname.equals(that.operatorFirstname) : that.operatorFirstname != null)
+			return false;
+		if (operatorLastname != null ? !operatorLastname.equals(that.operatorLastname) : that.operatorLastname != null)
+			return false;
+		if (initials != null ? !initials.equals(that.initials) : that.initials != null) return false;
+		if (cpr != null ? !cpr.equals(that.cpr) : that.cpr != null) return false;
+		return password != null ? password.equals(that.password) : that.password == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = operatorId;
+		result = 31 * result + (operatorFirstname != null ? operatorFirstname.hashCode() : 0);
+		result = 31 * result + (operatorLastname != null ? operatorLastname.hashCode() : 0);
+		result = 31 * result + (initials != null ? initials.hashCode() : 0);
+		result = 31 * result + (cpr != null ? cpr.hashCode() : 0);
+		result = 31 * result + (password != null ? password.hashCode() : 0);
+		result = 31 * result + (isActive ? 1 : 0);
+		return result;
+	}
+
+	public String toString() {
         return operatorId + "\t" + operatorFirstname + "\t" + initials + "\t" + cpr + "\t" + password + "\t" + isActive;
     }
 }

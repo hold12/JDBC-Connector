@@ -1,9 +1,11 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.IngredientBatchDAO;
 import dto01917.IngredientBatchDTO;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,9 +16,15 @@ import java.util.List;
  * Created by Freya on 01-05-2017.
  */
 public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
+    private IConnector connector;
+
+    public MYSQLIngredientBatchDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
     public IngredientBatchDTO getIngredientBatch(int ingredientBatchId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "ingredientbatch.select.where.id",
                 Integer.toString(ingredientBatchId)
         ));
@@ -35,7 +43,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList() throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "ingredientbatch.select.all"
         ));
 
@@ -58,7 +66,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList(int ingredientId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "ingredientbatch.select.where.ingredientid",
                 Integer.toString(ingredientId)
         ));
@@ -82,7 +90,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void createIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "ingredientbatch.insert",
                 Integer.toString(ingredientBatch.getIngredientId()),
                 Double.toString(ingredientBatch.getAmount())
@@ -91,7 +99,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "ingredientbatch.update",
                 Integer.toString(ingredientBatch.getIngredientBatchId()),
                 Integer.toString(ingredientBatch.getIngredientId()),
@@ -101,6 +109,6 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void deleteIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-
+        throw new NotImplementedException();
     }
 }

@@ -9,7 +9,7 @@ import java.sql.Statement;
 import daointerfaces01917.DALException;
 
 
-public class Connector
+public class Connector implements IConnector
 {
 	/**
 	 * To connect to a MySQL-server
@@ -25,7 +25,7 @@ public class Connector
 	 * @throws InstantiationException 
 	 * @throws SQLException 
 	 */
-	public static Connection connectToDatabase(String url, String username, String password)
+	public Connection connectToDatabase(String url, String username, String password)
 			throws InstantiationException, IllegalAccessException,
 					ClassNotFoundException, SQLException
 	{
@@ -33,7 +33,7 @@ public class Connector
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		
 		// get Connection-object via DriverManager
-		return (Connection) DriverManager.getConnection(url, username, password);
+		return DriverManager.getConnection(url, username, password);
 	}
 	
 	private static Connection conn;
@@ -56,17 +56,15 @@ public class Connector
 				Constant.username, Constant.password);
 	}
 	
-	public static ResultSet doQuery(String cmd) throws DALException
+	public ResultSet doQuery(String cmd) throws DALException
 	{
 		try { return stm.executeQuery(cmd); }
 		catch (SQLException e) { throw new DALException(e); }
 	}
 	
-	public static int doUpdate(String cmd) throws DALException
+	public int doUpdate(String cmd) throws DALException
 	{
 		try { return stm.executeUpdate(cmd); }
 		catch (SQLException e) { throw new DALException(e); }
 	}
-	
-	
 }
