@@ -29,4 +29,15 @@ public class RecipeDTO
 	public String toString() { 
 		return recipeId + "\t" + recipeName;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		RecipeDTO that = (RecipeDTO) o;
+
+		if (recipeId != that.recipeId) return false;
+		return recipeName != null ? recipeName.equals(that.recipeName) : that.recipeName == null;
+	}
 }

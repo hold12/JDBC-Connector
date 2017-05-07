@@ -59,9 +59,16 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
+            } else if(cmd.contains("from view_recipecomponent")){
+                RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
+                insertRecipeComponentResultSet(recipeComponentDTO);
+            } else if (cmd.contains("from view_recipe")) {
+                RecipeDTO recipeDTO = new RecipeDTO(1, "pizza");
+                // Insert a recipe to the ResultSet
+                insertRecipeResultSet(recipeDTO);
             } else if (cmd.contains("from view_productbatch")) {
                 ProductBatchDTO productBatchDTO = new ProductBatchDTO(1, 0, 1);
-                // Insert an ingredient to the ResultSet
+                // Insert an productbatch to the ResultSet
                 insertProductBatchResultSet(productBatchDTO);
             }
         }
@@ -129,6 +136,30 @@ public class TestConnector implements IConnector {
                 allowing(resultSet).getDouble("tare");            will(returnValue(productBatchComponent.getTare()));
                 allowing(resultSet).getDouble("net_weight");      will(returnValue(productBatchComponent.getNetWeight()));
                 allowing(resultSet).getInt("operator_id");        will(returnValue(productBatchComponent.getOperatorId()));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
+    private void insertRecipeResultSet(RecipeDTO recipe) throws DALException {
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("recipe_id");        will(returnValue((recipe.getRecipeId())));
+                allowing(resultSet).getString("recipe_name");   will(returnValue((recipe.getRecipeName())));
+            }});
+        } catch (SQLException e) {
+            throw new DALException(e);
+        }
+    }
+
+    private void insertRecipeComponentResultSet(RecipeComponentDTO recipeComponent) throws DALException{
+        try {
+            mockery.checking(new Expectations() {{
+                allowing(resultSet).getInt("recipe_id"); will(returnValue(recipeComponent.getRecipeId()));
+                allowing(resultSet).getInt("ingredient_id"); will(returnValue(recipeComponent.getIngredientId()));
+                allowing(resultSet).getDouble("nominated_net_weight"); will(returnValue(recipeComponent.getNominatedNetWeight()));
+                allowing(resultSet).getDouble("tolerance"); will(returnValue(recipeComponent.getTolerance()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);

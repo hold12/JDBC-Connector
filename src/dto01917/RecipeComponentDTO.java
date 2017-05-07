@@ -15,6 +15,20 @@ public class RecipeComponentDTO
 		this.tolerance = tolerance;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		RecipeComponentDTO that = (RecipeComponentDTO) o;
+
+		if (recipeId != that.recipeId) return false;
+		if (ingredientId != that.ingredientId) return false;
+		if (Double.compare(that.nominatedNetWeight, nominatedNetWeight) != 0) return false;
+		return Double.compare(that.tolerance, tolerance) == 0;
+	}
+
+
 	public int getRecipeId() { return recipeId; }
 	public void setRecipeId(int recipeId) { this.recipeId = recipeId; }
 	public int getIngredientId() { return ingredientId; }
