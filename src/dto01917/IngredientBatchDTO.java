@@ -2,9 +2,9 @@ package dto01917;
 
 public class IngredientBatchDTO
 {
-	int ingredientBatchId;                     // i omraadet 1-99999999
-	int ingredientId;             // i omraadet 1-99999999
-	double amount;             // kan vaere negativ
+	private int ingredientBatchId;                     // i omraadet 1-99999999
+	private int ingredientId;             // i omraadet 1-99999999
+	private double amount;             // kan vaere negativ
 
 	public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount)
 	{

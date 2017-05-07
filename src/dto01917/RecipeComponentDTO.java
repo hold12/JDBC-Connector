@@ -2,10 +2,10 @@ package dto01917;
 
 public class RecipeComponentDTO
 {
-	int recipeId;                  // auto genereres fra 1..n
-	int ingredientId;             // i omraadet 1-99999999
-	double nominatedNetWeight;            // skal vaere positiv og passende stor
-	double tolerance;           // skal vaere positiv og passende stor
+	private int recipeId;                  // auto genereres fra 1..n
+	private int ingredientId;             // i omraadet 1-99999999
+	private double nominatedNetWeight;            // skal vaere positiv og passende stor
+	private double tolerance;           // skal vaere positiv og passende stor
 	
 	public RecipeComponentDTO(int recipeId, int ingredientId, double nominatedNetWeight, double tolerance)
 	{

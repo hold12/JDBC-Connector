@@ -10,9 +10,9 @@ package dto01917;
 public class RecipeDTO
 {
 	/** Recept nr i omraadet 1-99999999 */
-	int recipeId;
+	private int recipeId;
 	/** Receptnavn min. 2 max. 20 karakterer */
-	String recipeName;
+	private String recipeName;
 	/** liste af kompenenter i recepten */
 	
     

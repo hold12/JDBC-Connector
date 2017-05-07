@@ -1,6 +1,5 @@
 package daoimpl01917;
 
-import connector01917.Connector;
 import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RecipeDAO;

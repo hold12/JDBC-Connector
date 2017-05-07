@@ -10,8 +10,8 @@ import java.text.MessageFormat;
 /**
  * Created by awo on 25/04/17.
  */
-public class Queries {
-    public static String getSQL(String propertyName) {
+class Queries {
+    static String getSQL(String propertyName) {
         File file = new File("resources/sql.properties");
         Properties properties = null;
 
@@ -25,7 +25,7 @@ public class Queries {
         return properties.getProperty(propertyName);
     }
 
-    public static String getFormatted(String propertyName, String... args) {
+    static String getFormatted(String propertyName, String... args) {
         return MessageFormat.format(getSQL(propertyName), (Object[]) args);
     }
 }

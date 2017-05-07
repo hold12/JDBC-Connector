@@ -10,11 +10,11 @@ package dto01917;
 public class IngredientDTO
 {
     /** i omraadet 1-99999999 vaelges af brugerne */
-    int ingredientId;
+    private int ingredientId;
     /** min. 2 max. 20 karakterer */
-    String ingredientName;
+    private String ingredientName;
     /** min. 2 max. 20 karakterer */
-    String supplier;
+    private String supplier;
 	
 	public IngredientDTO(int ingredientId, String ingredientName, String supplier)
 	{

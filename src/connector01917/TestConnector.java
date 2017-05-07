@@ -156,10 +156,10 @@ public class TestConnector implements IConnector {
     private void insertRecipeComponentResultSet(RecipeComponentDTO recipeComponent) throws DALException{
         try {
             mockery.checking(new Expectations() {{
-                allowing(resultSet).getInt("recipe_id"); will(returnValue(recipeComponent.getRecipeId()));
-                allowing(resultSet).getInt("ingredient_id"); will(returnValue(recipeComponent.getIngredientId()));
+                allowing(resultSet).getInt("recipe_id");               will(returnValue(recipeComponent.getRecipeId()));
+                allowing(resultSet).getInt("ingredient_id");           will(returnValue(recipeComponent.getIngredientId()));
                 allowing(resultSet).getDouble("nominated_net_weight"); will(returnValue(recipeComponent.getNominatedNetWeight()));
-                allowing(resultSet).getDouble("tolerance"); will(returnValue(recipeComponent.getTolerance()));
+                allowing(resultSet).getDouble("tolerance");            will(returnValue(recipeComponent.getTolerance()));
             }});
         } catch (SQLException e) {
             throw new DALException(e);

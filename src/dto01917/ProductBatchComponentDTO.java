@@ -2,11 +2,11 @@ package dto01917;
 
 public class ProductBatchComponentDTO
 {
-	int productbatchId; 	  // produktbatchets id
-	int ingredientbatchId;        // i omraadet 1-99999999
-	double tare;
-	double netWeight;
-	int operatorId;					// operatoer-nummer
+	private int productbatchId; 	  // produktbatchets id
+	private int ingredientbatchId;        // i omraadet 1-99999999
+	private double tare;
+	private double netWeight;
+	private int operatorId;					// operatoer-nummer
 
 
 	public ProductBatchComponentDTO(int productbatchId, int ingredientbatchId, double tare, double netWeight, int operatorId)
