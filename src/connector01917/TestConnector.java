@@ -59,9 +59,10 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
-            } else if (cmd.contains("view_recipe")) {
+            } else if (cmd.contains("from view_recipe")) {
+                RecipeDTO recipeDTO = new RecipeDTO(1, "Nachos");
                 // Insert a recipe to the ResultSet
-                insert
+                insertRecipeResultSet(recipeDTO);
             }
         }
 
@@ -142,13 +143,16 @@ public class TestConnector implements IConnector {
         }
     }
 
-    private void insertRecipeResultSet(RecipeComponentDTO recipeComponent) throws DALException {
+    private void insertRecipeResultSet(RecipeDTO recipe) throws DALException {
         try {
             mockery.checking(new Expectations() {{
                 allowing(resultSet).getInt("recipe_id");
-                will(returnValue((recipeComponent.getIngredientId())))
-                // in progress here --->
+                will(returnValue((recipe.getRecipeId())));
+                allowing(resultSet).getString("recipe_name");
+                will(returnValue((recipe.getRecipeName())));
             }});
+        } catch (SQLException e) {
+            throw new DALException(e);
         }
     }
 
