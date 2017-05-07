@@ -1,6 +1,7 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.RecipeDAO;
 import dto01917.RecipeDTO;
@@ -14,9 +15,15 @@ import java.util.List;
  * Created by Freya on 02-05-2017.
  */
 public class MYSQLRecipeDAO implements RecipeDAO {
+    private IConnector connector;
+
+    public MYSQLRecipeDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
     public RecipeDTO getRecipe(int recipeId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "recipe.select.where.id",
                 Integer.toString(recipeId)
         ));
@@ -35,7 +42,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public List<RecipeDTO> getRecipeList() throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "recipe.select.all"
         ));
 
@@ -57,7 +64,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void createRecipe(RecipeDTO recipe) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "recipe.insert",
                 recipe.getRecipeName()
         ));
@@ -65,7 +72,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void updateRecipe(RecipeDTO recipe) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "recipe.update",
                 Integer.toString(recipe.getRecipeId()),
                 recipe.getRecipeName()
@@ -74,7 +81,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void deleteRecipe(RecipeDTO recipe) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "recipe.delete",
                 Integer.toString(recipe.getRecipeId())
         ));

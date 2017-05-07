@@ -1,6 +1,7 @@
 package daoimpl01917;
 
 import connector01917.Connector;
+import connector01917.IConnector;
 import daointerfaces01917.DALException;
 import daointerfaces01917.IngredientDAO;
 import dto01917.IngredientDTO;
@@ -14,9 +15,15 @@ import java.util.List;
  * Created by User on 25-04-2017.
  */
 public class MYSQLIngredientDAO implements IngredientDAO {
+    private IConnector connector;
+
+    public MYSQLIngredientDAO(IConnector connector) {
+        this.connector = connector;
+    }
+
     @Override
     public IngredientDTO getIngredient(int ingredientId) throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "ingredient.select.where.id",
                 Integer.toString(ingredientId)
         ));
@@ -35,7 +42,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public List<IngredientDTO> getIngredientList() throws DALException {
-        ResultSet rs = Connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.doQuery(Queries.getFormatted(
                 "ingredient.select.all"
         ));
 
@@ -58,7 +65,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void createIngredient(IngredientDTO ingredient) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "ingredient.insert",
                 ingredient.getIngredientName(),
                 ingredient.getSupplier()
@@ -67,7 +74,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void updateIngredient(IngredientDTO ingredient) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "ingredient.update",
                 Integer.toString(ingredient.getIngredientId()),
                 ingredient.getIngredientName(),
@@ -77,7 +84,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void deleteIngredient(IngredientDTO ingredient) throws DALException {
-        Connector.doUpdate(Queries.getFormatted(
+        connector.doUpdate(Queries.getFormatted(
                 "ingredient.delete",
                 Integer.toString(ingredient.getIngredientId())
         ));
