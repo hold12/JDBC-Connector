@@ -59,13 +59,13 @@ public class TestConnector implements IConnector {
                 ProductBatchComponentDTO productBatchComponentDTO = new ProductBatchComponentDTO(1, 1, 0.5, 10, 1);
                 // Insert an ingredient to the ResultSet
                 insertProductBatchComponentResultSet(productBatchComponentDTO);
+            } else if(cmd.contains("from view_recipecomponent")){
+                RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
+                insertRecipeComponentResultSet(recipeComponentDTO);
             } else if (cmd.contains("from view_recipe")) {
                 RecipeDTO recipeDTO = new RecipeDTO(1, "pizza");
                 // Insert a recipe to the ResultSet
                 insertRecipeResultSet(recipeDTO);
-            } else if(cmd.contains("from view_recipecomponent")){
-                RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(1,2, 1.2, 1.2);
-                insertRecipeComponentResultSet(recipeComponentDTO);
             }
         }
 
