@@ -89,7 +89,7 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public void close() {
+    public void close() throws DALException {
         // Do nothing...
     }
 

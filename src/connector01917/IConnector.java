@@ -13,5 +13,5 @@ public interface IConnector {
     Connection connectToDatabase(String url, String username, String password) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
     ResultSet query(String cmd) throws DALException;
     int update(String cmd) throws DALException;
-    void close();
+    void close() throws DALException;
 }
