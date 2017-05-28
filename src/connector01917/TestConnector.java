@@ -37,7 +37,7 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public ResultSet doQuery(String cmd) throws DALException {
+    public ResultSet query(String cmd) throws DALException {
         cmd = cmd.toLowerCase();
         if (cmd.contains("select")) {
             this.selected = true;
@@ -77,7 +77,7 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public int doUpdate(String cmd) throws DALException {
+    public int update(String cmd) throws DALException {
         cmd = cmd.toLowerCase();
         if (cmd.contains("update"))
             this.updated = true;

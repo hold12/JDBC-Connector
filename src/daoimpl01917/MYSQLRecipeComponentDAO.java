@@ -21,7 +21,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
     }
     @Override
     public RecipeComponentDTO getRecipeComponent(int recipeId, int ingredientId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "recipecomponent.select.where.id",
                 Integer.toString(recipeId),
                 Integer.toString(ingredientId)
@@ -43,7 +43,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
 
     @Override
     public List<RecipeComponentDTO> getRecipeComponentList(int recipeId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "recipecomponent.select.where.recipeid",
                 Integer.toString(recipeId)
         ));
@@ -68,7 +68,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
 
     @Override
     public List<RecipeComponentDTO> getRecipeComponentList() throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "recipecomponent.select.all"
         ));
 
@@ -92,7 +92,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
 
     @Override
     public void createRecipeComponent(RecipeComponentDTO recipeComponent) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipecomponent.insert",
                 Integer.toString(recipeComponent.getIngredientId()),
                 Integer.toString(recipeComponent.getRecipeId()),
@@ -103,7 +103,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
 
     @Override
     public void updateRecipeComponent(RecipeComponentDTO recipeComponent) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipecomponent.update",
                 Integer.toString(recipeComponent.getIngredientId()),
                 Integer.toString(recipeComponent.getRecipeId()),
@@ -114,7 +114,7 @@ public class MYSQLRecipeComponentDAO implements RecipeComponentDAO {
 
     @Override
     public void deleteRecipeComponent(RecipeComponentDTO recipeComponent) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipecomponent.delete",
                 Integer.toString(recipeComponent.getIngredientId()),
                 Integer.toString(recipeComponent.getRecipeId())

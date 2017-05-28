@@ -22,7 +22,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public IngredientDTO getIngredient(int ingredientId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "ingredient.select.where.id",
                 Integer.toString(ingredientId)
         ));
@@ -41,7 +41,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public List<IngredientDTO> getIngredientList() throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "ingredient.select.all"
         ));
 
@@ -64,7 +64,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void createIngredient(IngredientDTO ingredient) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "ingredient.insert",
                 ingredient.getIngredientName(),
                 ingredient.getSupplier()
@@ -73,7 +73,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void updateIngredient(IngredientDTO ingredient) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "ingredient.update",
                 Integer.toString(ingredient.getIngredientId()),
                 ingredient.getIngredientName(),
@@ -83,7 +83,7 @@ public class MYSQLIngredientDAO implements IngredientDAO {
 
     @Override
     public void deleteIngredient(IngredientDTO ingredient) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "ingredient.delete",
                 Integer.toString(ingredient.getIngredientId())
         ));

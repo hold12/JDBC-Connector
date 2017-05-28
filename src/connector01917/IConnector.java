@@ -11,6 +11,6 @@ import java.sql.SQLException;
  */
 public interface IConnector {
     Connection connectToDatabase(String url, String username, String password) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
-    ResultSet doQuery(String cmd) throws DALException;
-    int doUpdate(String cmd) throws DALException;
+    ResultSet query(String cmd) throws DALException;
+    int update(String cmd) throws DALException;
 }

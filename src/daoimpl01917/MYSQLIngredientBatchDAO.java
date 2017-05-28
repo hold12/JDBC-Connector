@@ -23,7 +23,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public IngredientBatchDTO getIngredientBatch(int ingredientBatchId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "ingredientbatch.select.where.id",
                 Integer.toString(ingredientBatchId)
         ));
@@ -42,7 +42,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList() throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "ingredientbatch.select.all"
         ));
 
@@ -65,7 +65,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public List<IngredientBatchDTO> getIngredientBatchList(int ingredientId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "ingredientbatch.select.where.ingredientid",
                 Integer.toString(ingredientId)
         ));
@@ -89,7 +89,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void createIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "ingredientbatch.insert",
                 Integer.toString(ingredientBatch.getIngredientId()),
                 Double.toString(ingredientBatch.getAmount())
@@ -98,7 +98,7 @@ public class MYSQLIngredientBatchDAO implements IngredientBatchDAO {
 
     @Override
     public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "ingredientbatch.update",
                 Integer.toString(ingredientBatch.getIngredientBatchId()),
                 Integer.toString(ingredientBatch.getIngredientId()),

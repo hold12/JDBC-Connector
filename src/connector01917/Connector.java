@@ -56,13 +56,13 @@ public class Connector implements IConnector
 				Constant.username, Constant.password);
 	}
 	
-	public ResultSet doQuery(String cmd) throws DALException
+	public ResultSet query(String cmd) throws DALException
 	{
 		try { return stm.executeQuery(cmd); }
 		catch (SQLException e) { throw new DALException(e); }
 	}
 	
-	public int doUpdate(String cmd) throws DALException
+	public int update(String cmd) throws DALException
 	{
 		try { return stm.executeUpdate(cmd); }
 		catch (SQLException e) { throw new DALException(e); }
