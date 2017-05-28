@@ -67,4 +67,9 @@ public class Connector implements IConnector
 		try { return stm.executeUpdate(cmd); }
 		catch (SQLException e) { throw new DALException(e); }
 	}
+
+	@Override
+	public void close() {
+		// Do nothing...
+	}
 }

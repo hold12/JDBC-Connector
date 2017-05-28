@@ -88,6 +88,11 @@ public class TestConnector implements IConnector {
         return 0;
     }
 
+    @Override
+    public void close() {
+        // Do nothing...
+    }
+
     private void insertOperatorResultSet(OperatorDTO operator) throws DALException {
         try {
             mockery.checking(new Expectations() {{
@@ -177,8 +182,6 @@ public class TestConnector implements IConnector {
             throw new DALException(e);
         }
     }
-
-
 
     public boolean isSelected() { return selected; }
     public boolean isInserted() { return inserted; }
