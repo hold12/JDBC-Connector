@@ -14,16 +14,25 @@ import java.sql.Statement;
 public class DBConnector implements IConnector {
     private Connection connection;
     private Statement statement; // TODO: Make this a prepared statement, in a nice way
-    private boolean connectionIsOpen;
+    private boolean connectionIsOpen = false;
 
-    // private String host, database, username, password; // TODO: Used in CDIO1, I don't believe we need it?
+    private String host, database, username, password;
+    private int port;
+
+    public DBConnector(String hostname, int port, String database, String username, String password) {
+        this.database = database;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        this.host = "jdbc:mysql://"+hostname+":"+this.port+"/"+this.database;
+    }
 
     public DBConnector() {
-        this.connectionIsOpen = false;
+        new DBConnector("127.0.0.1", 3306, "", "root", ""); // TODO: Test diz pleazz
     }
 
     @Override
-    public Connection connectToDatabase(String url, String username, String password)
+    public Connection connectToDatabase()
             throws InstantiationException, IllegalAccessException,
                 ClassNotFoundException, SQLException {
         // TODO: When will InstantiationException or IllegalAccessException be thrown? - Will it ever be thrown?
@@ -33,14 +42,14 @@ public class DBConnector implements IConnector {
             throw new ClassNotFoundException("JDBC library not found in the project.");
 
         // Establish a connection. If connection fails, an SQLException will be thrown
-        this.connection = DriverManager.getConnection(url, username, password);
+        this.connection = DriverManager.getConnection(this.host, this.username, this.password);
 
         return this.connection;
     }
 
     private boolean checkJDBCDriverExists() {
         try {
-            Class.forName("com.mysql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             return false;
         }

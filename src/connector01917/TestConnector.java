@@ -32,7 +32,7 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public Connection connectToDatabase(String url, String username, String password) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public Connection connectToDatabase() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         return null;
     }
 

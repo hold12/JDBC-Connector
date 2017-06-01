@@ -1,6 +1,5 @@
 package daoimpl01917;
 
-import connector01917.Connector;
 import connector01917.IConnector;
 import connector01917.TestConnector;
 import dto01917.IngredientBatchDTO;

@@ -8,8 +8,6 @@ import dto01917.OperatorDTO;
 
 import java.sql.SQLException;
 
-import connector01917.Connector;
-
 public class Main {
 	public static void main(String[] args) {
 		IConnector connector = null;
