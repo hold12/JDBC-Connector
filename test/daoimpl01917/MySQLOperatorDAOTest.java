@@ -1,16 +1,11 @@
 package daoimpl01917;
 
-import connector01917.Connector;
 import connector01917.IConnector;
 import connector01917.TestConnector;
-import daointerfaces01917.DALException;
 import dto01917.OperatorDTO;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.Assert.*;
 

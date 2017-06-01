@@ -32,12 +32,12 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public Connection connectToDatabase(String url, String username, String password) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public Connection connectToDatabase() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         return null;
     }
 
     @Override
-    public ResultSet doQuery(String cmd) throws DALException {
+    public ResultSet query(String cmd) throws DALException {
         cmd = cmd.toLowerCase();
         if (cmd.contains("select")) {
             this.selected = true;
@@ -77,7 +77,7 @@ public class TestConnector implements IConnector {
     }
 
     @Override
-    public int doUpdate(String cmd) throws DALException {
+    public int update(String cmd) throws DALException {
         cmd = cmd.toLowerCase();
         if (cmd.contains("update"))
             this.updated = true;
@@ -86,6 +86,11 @@ public class TestConnector implements IConnector {
         else if (cmd.contains("insert"))
             this.inserted = true;
         return 0;
+    }
+
+    @Override
+    public void close() throws DALException {
+        // Do nothing...
     }
 
     private void insertOperatorResultSet(OperatorDTO operator) throws DALException {
@@ -177,8 +182,6 @@ public class TestConnector implements IConnector {
             throw new DALException(e);
         }
     }
-
-
 
     public boolean isSelected() { return selected; }
     public boolean isInserted() { return inserted; }

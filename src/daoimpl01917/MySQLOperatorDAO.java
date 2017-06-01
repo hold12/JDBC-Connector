@@ -18,7 +18,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public OperatorDTO getOperator(int operatorId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "operator.select.where.id", Integer.toString(operatorId)
         ));
 
@@ -40,7 +40,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public void createOperator(OperatorDTO operator) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "operator.insert",
                 operator.getOperatorFirstname(),
                 operator.getOperatorLastname(),
@@ -57,7 +57,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
             isActive = 1;
         }
 
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "operator.update",
                 Integer.toString(operator.getOperatorId()),
                 operator.getOperatorFirstname(),
@@ -70,7 +70,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
     }
 
     public void deleteOperator(OperatorDTO operator) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "operator.delete",
                 Integer.toString(operator.getOperatorId())
         ));
@@ -78,7 +78,7 @@ public class MySQLOperatorDAO implements OperatorDAO {
 
     public List<OperatorDTO> getOperatorList() throws DALException {
         List<OperatorDTO> list = new ArrayList<OperatorDTO>();
-        ResultSet rs = connector.doQuery(
+        ResultSet rs = connector.query(
                 Queries.getSQL("operator.select.all")
         );
 

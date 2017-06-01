@@ -22,7 +22,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public RecipeDTO getRecipe(int recipeId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "recipe.select.where.id",
                 Integer.toString(recipeId)
         ));
@@ -41,7 +41,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public List<RecipeDTO> getRecipeList() throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "recipe.select.all"
         ));
 
@@ -63,7 +63,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void createRecipe(RecipeDTO recipe) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipe.insert",
                 recipe.getRecipeName()
         ));
@@ -71,7 +71,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void updateRecipe(RecipeDTO recipe) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipe.update",
                 Integer.toString(recipe.getRecipeId()),
                 recipe.getRecipeName()
@@ -80,7 +80,7 @@ public class MYSQLRecipeDAO implements RecipeDAO {
 
     @Override
     public void deleteRecipe(RecipeDTO recipe) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "recipe.delete",
                 Integer.toString(recipe.getRecipeId())
         ));

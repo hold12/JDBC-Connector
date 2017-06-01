@@ -23,7 +23,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public ProductBatchDTO getProductBatch(int productbatchId) throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "productbatch.select.where.id",
                 Integer.toString(productbatchId)
         ));
@@ -42,7 +42,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public List<ProductBatchDTO> getProductBatchList() throws DALException {
-        ResultSet rs = connector.doQuery(Queries.getFormatted(
+        ResultSet rs = connector.query(Queries.getFormatted(
                 "productbatch.select.all"
         ));
 
@@ -65,7 +65,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public void createProductBatch(ProductBatchDTO productBatch) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "productbatch.insert",
                 Integer.toString(productBatch.getStatus()),
                 Integer.toString(productBatch.getRecipeId())
@@ -74,7 +74,7 @@ public class MYSQLProductBatchDAO implements ProductBatchDAO {
 
     @Override
     public void updateProductBatch(ProductBatchDTO productBatch) throws DALException {
-        connector.doUpdate(Queries.getFormatted(
+        connector.update(Queries.getFormatted(
                 "productbatch.update",
                 Integer.toString(productBatch.getProductbatchId()),
                 Integer.toString(productBatch.getStatus()),
